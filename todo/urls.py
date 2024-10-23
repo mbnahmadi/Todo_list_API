@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from .views import create_Todo
 
 urlpatterns = [
+    path('create/', create_Todo.as_view() , name='create_Todo'),
 ]

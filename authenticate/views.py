@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework_simplejwt.tokens import RefreshToken 
 # from
 # Create your views here.
 
@@ -15,7 +16,10 @@ class registerView(APIView):
     def post(self,request):
         serializer = registerSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            
-            return Response({'message':'User create successfuly!'} , status=status.HTTP_201_CREATED)
+            user = serializer.save()
+            refresh = RefreshToken.for_user(user)
+            return Response({'message':'User create successfuly!',
+                            'user':{'name':user.name , 'email':user.email} ,
+                            'refresh':str(refresh),'access_token':str(refresh.access_token)} ,
+                            status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)    
