@@ -4,7 +4,7 @@ from authenticate.models import User
 
 
 class TodoModel(models.Model):
-    user = models.OneToOneField(User , on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField()
     
@@ -12,4 +12,4 @@ class TodoModel(models.Model):
         verbose_name = 'Todo List'
 
     def __str__(self):
-        return self.user
+        return f'{self.pk}-{self.user.email}'

@@ -5,3 +5,10 @@ class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = TodoModel
         fields = ['title','description']
+   
+
+
+class getTodoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TodoModel
+        fields = ['pk','title','description']
