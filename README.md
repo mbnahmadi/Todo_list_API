@@ -56,8 +56,8 @@ Request:
 ## Search Functionality
 
 You can get all your todos by specific page and limit item.
-
-GET /todo/get/?page=1&limit=10
+    ```bash
+    GET /todo/get/?page=1&limit=10
 
 
 ## API Documentation
