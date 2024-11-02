@@ -1,17 +1,17 @@
 https://roadmap.sh/projects/todo-list-api
 
-#### Todo List API
+# Todo List API
 A simple Django-based API that provides Authentication, Create, Read, Update, Delete (CRUD) operations, along with search functionality for title,contact and category.
 
 
 
-### Prerequisites
+## Prerequisites
 
 - Python 3.x
 - PostgreSQL (or any database you use)
 
 
-### Installation
+## Installation
 
 1. Clone the repository:
    ```bash
@@ -28,15 +28,15 @@ A simple Django-based API that provides Authentication, Create, Read, Update, De
 - python manage.py runserver
 
 
-### Endpoints
+## Endpoints
 
-## Athentication
+### Athentication
 
 - `POST /auth/register/` - Create a new user
 - `POST /api/token/` - Get token to login
 - `POST /api/token/refresh` - Get refresh token
 
-## Todo
+### Todo
 
 - `POST /todo/create/` - Create your new todo
 - `PUT /todo/update/<id>/` - Update your specific todo by ID
@@ -44,7 +44,7 @@ A simple Django-based API that provides Authentication, Create, Read, Update, De
 - `GET /todo/get/` - Get all of your todos
 
 
-### Example: Creating a resource
+## Example: Creating a resource
 
 Request:
 
@@ -53,14 +53,14 @@ Request:
     "description": "string",
 }
 
-### Search Functionality
+## Search Functionality
 
 You can get all your todos by specific page and limit item.
 
 GET /todo/get/?page=1&limit=10
 
 
-### API Documentation
+## API Documentation
 
 The API documentation is available at `/swagger/` for Swagger UI and `/redoc/` for ReDoc.
 
