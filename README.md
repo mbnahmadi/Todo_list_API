@@ -57,7 +57,7 @@ Request:
 
 You can get all your todos by specific page and limit item.
     ```bash
-    GET /todo/get/?page=1&limit=10
+    http://localhost:8000/todo/get/?page=1&limit=10
 
 
 ## API Documentation
