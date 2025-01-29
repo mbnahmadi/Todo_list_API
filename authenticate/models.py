@@ -1,10 +1,9 @@
 from django.db import models
-
-# Create your models here.
 from django.contrib.auth.models import (
-    AbstractBaseUser, BaseUserManager, PermissionsMixin)
-
-from django.db import models
+    AbstractBaseUser, 
+    BaseUserManager, 
+    PermissionsMixin
+)
 
 
 class UserManager(BaseUserManager):
@@ -12,10 +11,12 @@ class UserManager(BaseUserManager):
     def create_user(self, name, email, password=None):
 
         if email is None:
-            raise TypeError('Users should have a Email')
+            raise TypeError('Users should have an Email')
+        if password is None:
+            raise TypeError('password can not be none')
 
         user = self.model(name=name, email=self.normalize_email(email))
-        user.set_password(password)
+        user.set_password(password) #hash password
         user.save()
         return user
 
@@ -47,3 +48,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+
+    def save(self, *args, **kwargs):
+        '''
+        hash password just in admin pannel
+        '''
+        if self.pk is None or not self.password.startswith('pbkdf2_sha256$'):
+            self.set_password(self.password)
+        super().save(*args, **kwargs)    

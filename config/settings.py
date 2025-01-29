@@ -45,23 +45,7 @@ INSTALLED_APPS = [
     'todo',
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-    # 'DEFAULT_PERMISSION_CLASSES':(
-    #     'rest_framework.permissions.IsAuthenticated'
-    # )
-}
 
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=365),  
-    'ROTATE_REFRESH_TOKENS': True,
-    'BLACKLIST_AFTER_ROTATION': True,
-}
-
-AUTH_USER_MODEL = 'authenticate.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -97,23 +81,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tododb',
-        'USER': 'postgres',
-        'PASSWORD': '123456789',
-        'HOST': 'localhost',
-        'PORT': 5432,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'tododb',
+#         'USER': 'postgres',
+#         'PASSWORD': '123456789',
+#         'HOST': 'localhost',
+#         'PORT': 5432,
+#     }
+# }
 
 
 # Password validation
@@ -133,6 +117,28 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+
+
+
+AUTH_USER_MODEL = 'authenticate.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    # 'DEFAULT_PERMISSION_CLASSES':(
+    #     'rest_framework.permissions.IsAuthenticated'
+    # )
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=365),  
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+}
 
 
 # Internationalization
