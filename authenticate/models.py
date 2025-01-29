@@ -17,7 +17,13 @@ class UserManager(BaseUserManager):
 
         user = self.model(name=name, email=self.normalize_email(email))
         user.set_password(password) #hash password
-        user.save()
+        '''
+        When using multiple databases in a Django project, 
+        self._db specifies in which database the current object will be stored.
+        If we remove using=self._db, by default, 
+        Django will only use the main database (default) and problems may occur when using multiple databases.
+        '''
+        user.save(using=self._db) 
         return user
 
     def create_superuser(self, name, email, password=None):
@@ -27,7 +33,7 @@ class UserManager(BaseUserManager):
         user = self.create_user(name, email, password)
         user.is_superuser = True
         user.is_staff = True
-        user.save()
+        user.save(using=self._db)
         return user
 
 
@@ -53,6 +59,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     def save(self, *args, **kwargs):
         '''
         hash password just in admin pannel
+        '''
+        '''
+        When you override the model's save method, 
+        you must pass *args, **kwargs to preserve all of the default save() arguments.
         '''
         if self.pk is None or not self.password.startswith('pbkdf2_sha256$'):
             self.set_password(self.password)
