@@ -33,7 +33,7 @@ class UserManager(BaseUserManager):
         user = self.create_user(name, email, password)
         user.is_superuser = True
         user.is_staff = True
-        user.save(using=self._db)
+        user.save(using=self._db) 
         return user
 
 
@@ -56,14 +56,14 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 
-    def save(self, *args, **kwargs):
-        '''
-        hash password just in admin pannel
-        '''
-        '''
-        When you override the model's save method, 
-        you must pass *args, **kwargs to preserve all of the default save() arguments.
-        '''
-        if self.pk is None or not self.password.startswith('pbkdf2_sha256$'):
-            self.set_password(self.password)
-        super().save(*args, **kwargs)    
+    # def save(self, *args, **kwargs):
+    #     '''
+    #     hash password just in admin pannel
+    #     '''
+    #     '''
+    #     When you override the model's save method, 
+    #     you must pass *args, **kwargs to preserve all of the default save() arguments.
+    #     '''
+    #     if self._state.adding or not self.password.startswith('pbkdf2_sha256$'):
+    #         self.set_password(self.password)
+    #     super().save(*args, **kwargs)    

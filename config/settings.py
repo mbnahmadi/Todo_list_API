@@ -129,17 +129,21 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTH_USER_MODEL = 'authenticate.User'
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',),
+
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,  # تعداد آیتم‌ها در هر صفحه
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE': 10,
+
     # 'DEFAULT_PERMISSION_CLASSES':(
     #     'rest_framework.permissions.IsAuthenticated'
     # )
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=365),  
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),  
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  
     'ROTATE_REFRESH_TOKENS': True,       # توکن‌های رفرش بعد از هر درخواست جدید می‌شوند
     'BLACKLIST_AFTER_ROTATION': True,    # توکن قبلی بعد از چرخش نامعتبر می‌شود
 }
