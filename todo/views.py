@@ -92,8 +92,11 @@ class GetTodoView(APIView):
                                             ])
     
     def get(self,request):
-        page = int(request.query_params.get('page'))
-        limit = int(request.query_params.get('limit'))
+        try:
+            page = int(request.query_params.get('page'))
+            limit = int(request.query_params.get('limit'))
+        except:
+            raise("page and limit parameter required") 
 
         todos = TodoModel.objects.filter(user=request.user)
         paginator = Paginator(todos,limit)

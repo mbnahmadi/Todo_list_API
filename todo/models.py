@@ -13,6 +13,7 @@ class TodoModel(models.Model):
     
     class Meta:
         verbose_name = 'Todo List'
+        ordering = ("pk",)
 
     def __str__(self):
         return f'{self.pk}-{self.user.email}'
